@@ -12,7 +12,7 @@ if(query){
 }
 
 document.querySelector("textarea#prompt-textarea").onkeypress = e => {
-  if(e.key === 'Enter'){
+  if(e.key === 'Enter' && !e.shiftKey){
     submit()
     e.preventDefault()
   }
