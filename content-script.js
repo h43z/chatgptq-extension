@@ -1,19 +1,21 @@
-const query = new URLSearchParams(location.search).get('q')
-const input = document.querySelector('[data-id="root"]')
+// wait until textarea appears to attach event listener
+const observer = new MutationObserver((mutations, obs) => {
+  const textarea = document.querySelector('#prompt-textarea')
 
-const submit = _ => {
-  input.dispatchEvent(new Event('input', {bubbles: true}))
-  input.nextSibling.click()
-}
+  if(!textarea)
+    return
 
-if(query){
-  input.innerText = decodeURIComponent(query)
-  submit()
-}
+  textarea.addEventListener('keydown', e => {
+    if(e.key === 'Enter' && !e.shiftKey){
+      const send = document.querySelector('[data-testid="send-button"]')
+      send.click()
+    }
+  })
 
-document.querySelector("textarea#prompt-textarea").onkeypress = e => {
-  if(e.key === 'Enter' && !e.shiftKey){
-    submit()
-    e.preventDefault()
-  }
-}
+  obs.disconnect()
+})
+
+observer.observe(document.body, {
+  childList: true,
+  subtree: true,
+})

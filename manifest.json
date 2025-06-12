@@ -1,10 +1,10 @@
 {
-  "name": "ChatGPT query parameter",
+  "name": "ChatGPT enter press",
   "manifest_version": 2,
-  "description": "provide prompt input via query parameter to chat.openai.com",
-  "version": "0.3",
+  "description": "allow to press enter on chat",
+  "version": "0.4",
   "content_scripts": [{
-    "matches": ["https://chat.openai.com/*"],
+    "matches": ["https://chatgpt.com/*"],
     "js": ["content-script.js"],
     "run_at": "document_end"
   }],
@@ -15,6 +15,6 @@
   },
   "permissions": [
     "activeTab",
-    "https://chat.openai.com/*"
+    "https://chatgpt.com/*"
   ]
 }
